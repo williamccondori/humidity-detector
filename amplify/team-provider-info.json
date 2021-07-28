@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-humiditydetector-staging-185231-authRole",
+      "UnauthRoleArn": "arn:aws:iam::204244679023:role/amplify-humiditydetector-staging-185231-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::204244679023:role/amplify-humiditydetector-staging-185231-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-humiditydetector-staging-185231-deployment",
+      "UnauthRoleName": "amplify-humiditydetector-staging-185231-unauthRole",
+      "StackName": "amplify-humiditydetector-staging-185231",
+      "StackId": "arn:aws:cloudformation:us-east-1:204244679023:stack/amplify-humiditydetector-staging-185231/f704bc40-efd4-11eb-9d77-0a5cb40a5d41",
+      "AmplifyAppId": "d1cyuz40t56tgj"
+    },
+    "categories": {
+      "auth": {
+        "humiditydetector": {}
+      }
+    }
+  }
+}
