@@ -10,9 +10,9 @@ type ProjectMetaData = {
 
 export declare class Project {
   readonly id: string;
-  readonly title: string;
+  readonly name: string;
   readonly description: string;
-  readonly image: string;
+  readonly image?: string;
   readonly location?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
