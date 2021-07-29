@@ -13,7 +13,7 @@ export declare class Project {
   readonly name: string;
   readonly description: string;
   readonly image?: string;
-  readonly location?: string;
+  readonly locationId: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Project, ProjectMetaData>);

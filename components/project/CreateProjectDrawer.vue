@@ -7,15 +7,16 @@
     <div class="drawer__container">
       <el-form
         :model="form"
+        :rules="rules"
         ref="form"
         size="small"
         @submit.native.prevent="submit"
       >
-        <el-form-item label="Name:">
+        <el-form-item prop="name" label="Name:">
           <el-input v-model="form.name" type="text"></el-input>
         </el-form-item>
-        <el-form-item label="Description:">
-          <small class="color-red">Máximo 100 caractéres</small>
+        <el-form-item prop="description" label="Description:">
+          <small class="color-red">Maximum 100 characters</small>
           <el-input
             type="textarea"
             :rows="2"
@@ -24,11 +25,30 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item label="Location:">
-          <location-search @change="selectLocation"></location-search>
+        <el-form-item label="Location:" prop="locationId">
+          <el-select
+            v-model="form.locationId"
+            remote
+            clearable
+            filterable
+            reserve-keyword
+            :remote-method="search"
+            :loading="isloading"
+            class="location__search"
+          >
+            <el-option
+              v-for="option in options"
+              :key="option.magicKey"
+              :label="option.text"
+              :value="option.magicKey"
+            >
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" native-type="submit">Guardar</el-button>
+          <el-button plain type="primary" native-type="submit">
+            Guardar
+          </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -36,21 +56,43 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { mapActions } from 'vuex'
 import { DataStore } from '@aws-amplify/datastore'
 import { Project } from '../../src/models'
-import LocationSearch from '../common/LocationSearch.vue'
 export default {
-  components: {
-    LocationSearch
-  },
   data() {
     return {
+      // Form rules properties.
+      rules: {
+        name: [
+          {
+            required: true,
+            message: 'Name is required'
+          }
+        ],
+        description: [
+          {
+            required: true,
+            message: 'Description is required'
+          }
+        ],
+        locationId: [
+          {
+            required: true,
+            message: 'Location is required'
+          }
+        ]
+      },
+      // Form properties.
       form: {
         name: '',
         description: '',
-        location: null
-      }
+        locationId: null
+      },
+      // Location properties.
+      isloading: false,
+      options: []
     }
   },
   computed: {
@@ -68,39 +110,40 @@ export default {
         description: '',
         location: null
       }
+      this.$refs.form.resetFields()
     },
-    selectLocation(location) {
-      if (location) {
-        this.form.location = {
-          name: location.address,
-          center: location.location
-        }
-      } else {
-        this.form.location = null
+    async search(criteria) {
+      try {
+        const url = `https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/suggest?f=json&langCode=es&text=${criteria}`
+        const { data } = await axios.get(url)
+        this.options = data.suggestions
+      } catch (error) {
+        this.$message.error(error.message)
+      } finally {
+        this.isloading = false
       }
     },
     async submit() {
       try {
-        await DataStore.save(
-          new Project({
-            name: this.form.name,
-            description: this.form.description,
-            location: JSON.stringify(this.form.location)
-          })
-        )
+        this.$refs.form.validate((x) => {
+          if (!x) throw new Error('Check the required data')
+        })
+        await DataStore.save(new Project({ ...this.form }))
         await this.getProjects()
         this.reset()
         this.setProjectDrawer(false)
-        this.$message.success('El proyecto se ha creado correctamente')
+        this.$message.success('The project has been created successfully')
       } catch (error) {
         this.$message.error(error.message)
       }
     },
     async confirmClose() {
-      this.$confirm('¿Desea cancelar la operación?').then(() => {
-        this.reset()
-        this.setProjectDrawer(false)
-      })
+      this.$confirm('Do you want to cancel this operation?')
+        .then(() => {
+          this.reset()
+          this.setProjectDrawer(false)
+        })
+        .catch(() => {})
     }
   }
 }
@@ -109,5 +152,8 @@ export default {
 <style scoped>
 .drawer__container {
   padding: 1rem;
+}
+.location__search {
+  width: 100%;
 }
 </style>

@@ -31,11 +31,11 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "location": {
-                    "name": "location",
+                "locationId": {
+                    "name": "locationId",
                     "isArray": false,
-                    "type": "AWSJSON",
-                    "isRequired": false,
+                    "type": "String",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "createdAt": {
@@ -92,5 +92,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "f67b9ac38d18e6ef4c986d20d003dfdd"
+    "version": "4d360af34eb9211e7a391ebfcedf2866"
 };

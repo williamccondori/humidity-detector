@@ -9,7 +9,7 @@
     :loading="isloading"
     class="select"
     @change="change"
-    placeholder="Search a location"
+    :placeholder="placeholder"
   >
     <el-option
       v-for="option in options"
@@ -23,12 +23,26 @@
 
 <script>
 import axios from 'axios'
+
 export default {
+  props: ['value'],
   data() {
     return {
       locationId: null,
+      placeholder: 'Search a location',
       isloading: false,
       options: []
+    }
+  },
+  watch: {
+    value(value) {
+      if (!value) {
+        this.locationId = null
+        this.placeholder = 'Search a location'
+      } else {
+        console.log(value)
+        this.placeholder = value.name
+      }
     }
   },
   methods: {

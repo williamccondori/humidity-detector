@@ -1,9 +1,10 @@
 <template>
   <div class="projects__container">
     <el-card shadow="hover" v-for="project in projects" :key="project.id">
-      <h1>{{ project.name }}</h1>
+      <div slot="header">
+        <nuxt-link :to="`projects/${project.id}`">{{ project.name }}</nuxt-link>
+      </div>
       <p>{{ project.description }}</p>
-      <a :href="project.id">{{ project.id }}</a>
     </el-card>
   </div>
 </template>

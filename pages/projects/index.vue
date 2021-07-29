@@ -10,9 +10,9 @@
 
 <script>
 import { mapActions } from 'vuex'
-import SecondaryPage from '../components/common/SecondaryPage'
-import ProjectList from '../components/project/ProjectList.vue'
-import CreateProjectDrawer from '../components/project/CreateProjectDrawer.vue'
+import SecondaryPage from '../../components/common/SecondaryPage.vue'
+import ProjectList from '../../components/project/ProjectList.vue'
+import CreateProjectDrawer from '../../components/project/CreateProjectDrawer.vue'
 
 export default {
   layout: 'admin',

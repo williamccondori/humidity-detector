@@ -3,6 +3,6 @@ type Project @model @auth(rules: [{allow: public}, {allow: private}]) {
   name: String!
   description: String!
   image: AWSURL
-  location: AWSJSON
+  locationId: String!
 }
-  
+ 

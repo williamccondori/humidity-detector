@@ -1,7 +1,7 @@
 <template>
   <section>
     <header>
-      <el-page-header @back="$router.push('/')" :content="title" />
+      <el-page-header @back="$router.back()" :content="title" />
       <el-divider />
     </header>
     <main>
