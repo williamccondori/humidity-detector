@@ -149,7 +149,7 @@ export default {
     const project = await DataStore.query(Project, this.slug)
     this.project = { ...project }
     const { locationId: magicKey } = this.project
-    const url = `http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?f=json&langCode=spa&outFields=*&magicKey=${magicKey}`
+    const url = `https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?f=json&langCode=spa&outFields=*&magicKey=${magicKey}`
     const promise = await axios.get(url)
     if (promise.data) {
       this.projectName = promise.data.candidates[0].address
