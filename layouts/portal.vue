@@ -1,44 +1,54 @@
 <template>
-  <div class="container">
-    <div class="menu">
-      <h1>Menú</h1>
+  <main>
+    <div class="portal">
+      <div class="portal__menu">
+        <portal-menu />
+      </div>
+      <div class="portal__content">
+        <Nuxt />
+      </div>
+
+      <!--
+
+  <div>
+
+    <div ref="analitycs" class="option-panel">
+      <h1 class="sidebar__title">HERRAMIENTAS ANALÍTICAS</h1>
+      <el-card shadow="hover"> </el-card>
     </div>
-    <Nuxt />
+    <section class="portal__container">
+      <aside class="portal__options">
+        <button class="item" @click="openSideBar('search')">
+          <i class="el-icon-search"></i>
+        </button>
+        <button class="item" @click="openSideBar('analitycs')">
+          <i class="el-icon-data-line"></i>
+        </button>
+      </aside>
+      <Map />
+    </section>
   </div>
+        -->
+    </div>
+  </main>
 </template>
 
 <script>
-export default {}
+import PortalMenu from '~/components/portal/PortalMenu.vue'
+
+export default {
+  components: {
+    PortalMenu
+  }
+}
 </script>
 
-<style>
-html,
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #fafafa;
-}
-.container {
+<style scoped>
+.portal {
   display: grid;
-  grid-template-columns: 300px 1fr;
-  min-height: 100vh;
+  grid-template-columns: 80px 1fr;
 }
-.menu {
-  background-color: #252525;
-}
-.color-red {
-  color: red;
-}
-
-/** Margins utils */
-
-.mb-1 {
-  margin-bottom: 1rem;
-}
-.mb-1-5 {
-  margin-bottom: 1.5rem;
-}
-.mb-2 {
-  margin-bottom: 2rem;
+.portal__menu {
+  background-color: #212121;
 }
 </style>
