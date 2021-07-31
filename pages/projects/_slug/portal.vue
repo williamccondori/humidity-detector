@@ -1,15 +1,15 @@
 <template>
   <div>
-    <Menu />
-    <el-page-header content="Mis proyectos"></el-page-header>
+    <Map class="map"></Map>
   </div>
 </template>
 
 <script>
-import Menu from './../components/common/Menu.vue'
+import Map from '~/components/Map.vue'
 export default {
+  layout: 'portal',
   components: {
-    Menu
+    Map
   }
 }
 </script>
