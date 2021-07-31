@@ -96,8 +96,8 @@
 <script>
 import axios from 'axios'
 import { mapActions } from 'vuex'
-import { DataStore } from '@aws-amplify/datastore'
 import { Project } from '../../../src/models'
+import { DataStore } from '@aws-amplify/datastore'
 import SecondaryPage from '../../../components/common/SecondaryPage.vue'
 export default {
   layout: 'admin',

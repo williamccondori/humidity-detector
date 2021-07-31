@@ -1,10 +1,18 @@
 <template>
   <secondary-page title="My projects">
-    <el-button plain type="primary" class="mb-1-5" @click="createProject">
-      New project
-    </el-button>
-    <project-list />
-    <create-project-drawer />
+    <el-card shadow="none">
+      <el-button
+        plain
+        size="small"
+        type="primary"
+        class="mb-1-5"
+        @click="createProject"
+      >
+        New project
+      </el-button>
+      <project-list />
+      <create-project-drawer />
+    </el-card>
   </secondary-page>
 </template>
 
