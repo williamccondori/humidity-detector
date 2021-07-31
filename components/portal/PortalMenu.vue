@@ -32,7 +32,7 @@
       >
         <el-button slot="append" icon="el-icon-search" @click="search" />
       </el-input>
-      <el-card shadow="none" class="mb-1" v-if="suggestions.length > 0">
+      <el-card shadow="none" class=" mb-1" v-if="suggestions.length > 0">
         <div
           v-for="suggestion in suggestions"
           :key="suggestion.magicKey"
@@ -60,8 +60,11 @@
         <i class="el-icon-arrow-left"></i>
       </el-button>
       <h1 class="sidebar__title">Statics</h1>
-      <el-card>
-        <el-table :data="humidities"></el-table>
+      <el-card class="results__container">
+        <el-table :data="humidities">
+          <el-table-column prop="name" label="Nombre" />
+          <el-table-column prop="measure" label="Humidity" />
+        </el-table>
       </el-card>
     </div>
 
@@ -140,11 +143,9 @@ export default {
       const { data } = await axios.get(
         'https://2jhd58eoci.execute-api.us-east-1.amazonaws.com/staging/results'
       )
-      const resultsObject = JSON.parse(data.body)
-      const results = Object.keys(resultsObject).map(
-        (key) => resultsObject[key]
-      )
-      this.humidities = results
+      console.log(data)
+      const resultsObject = data.Items
+      this.humidities = resultsObject
     } catch (error) {}
   },
   methods: {
